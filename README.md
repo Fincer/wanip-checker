@@ -6,9 +6,9 @@ WAN IPv4 checker & email notifier for server environments behind dynamic DHCP.
 
 This repository contains a systemd service file & a simple bash script to refresh current WAN IPv4 of a server, and notify server admin for any changes in the server WAN (Internet) address. This helps in several issues:
 
-    - Server admin is always aware of the current server IPv4 address, whether the address is dynamic or not.
+- Server admin is always aware of the current server IPv4 address, whether the address is dynamic or not.
 
-    - Server admin is able to remotely connect to the server environment although the server IP may have been changed. This is possible because the admin is notified about any WAN IPv4 address changes via email by the server itself, automatically.
+- Server admin is able to remotely connect to the server environment although the server IP may have been changed. This is possible because the admin is notified about any WAN IPv4 address changes via email by the server itself, automatically.
 
 In many home networks, WAN (Wide Area Network) IP addresses are dynamically allocated by a local ISP. Usually this is okay in common household/home use, but not in server use. 
 
