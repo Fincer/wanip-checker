@@ -38,7 +38,7 @@ In most server environments, static DHCP lease/static IP address is a mandatory 
 
 **1)** Insert `wanip-checker@.service` into `/usr/lib/systemd/user/` folder
 
-    - WAN IP check interval is customizable in systemd service file. Default value is `60` (1 min)
+- WAN IP check interval is customizable in systemd service file. Default value is `60` (1 min)
 
 **2)** Insert `wanip-checker.sh` into your `/home/myuser/` folder
 
