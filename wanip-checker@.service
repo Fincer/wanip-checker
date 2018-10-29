@@ -1,0 +1,25 @@
+# Should be placed to /usr/lib/systemd/user/
+
+####
+# Usage
+
+# systemctl --user enable wanip-checker@<username>.service && \
+# systemctl --user start wanip-checker@<username>.service && \
+# systemctl --user daemon-reload
+
+[Unit]
+Description=WAN IPv4 checker & email sender for dynamic IPv4 server environments
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/bash /home/%i/wanip-checker.sh
+
+# Restart (check) every 1 minute (60 seconds)
+RestartSec=60
+Restart=always
+
+# Emailing fails if this is enabled
+#NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
