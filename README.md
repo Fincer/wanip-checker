@@ -4,15 +4,15 @@ WAN IPv4 checker & email notifier for server environments behind dynamic DHCP.
 
 ## About
 
-This repository contains a systemd service file & a simple bash script to refresh current WAN IPv4 of a server, and notify server admin for any changes in the server WAN (Internet) address. This helps in several issues:
+In many home networks, WAN (Wide Area Network) IP addresses are dynamically allocated by a local ISP. Usually this is acceptable in common household/home use, but not in server use where static DHCP lease/static IP address is very much a mandatory requirement.
 
-- Server admin is always aware of the current server IPv4 address, whether the address is dynamic or not.
+However, static IPs are usually offered only to corporate environments, and not everyone wants to pay extra for such in order to establish a simple server environment in home.
 
-- Server admin is able to remotely connect to the server environment although the server IP may have been changed. This is possible because the admin is notified about any WAN IPv4 address changes via email by the server itself, automatically.
+This repository contains a systemd service file & a simple bash script to refresh current WAN IPv4 of a Linux server, and notify server admins for any changes in the server WAN IPv4 (Internet) address. This helps in several issues:
 
-In many home networks, WAN (Wide Area Network) IP addresses are dynamically allocated by a local ISP. Usually this is okay in common household/home use, but not in server use. 
+- Server admins are always aware of the current server IPv4 address, whether the address is dynamic or not.
 
-In most server environments, static DHCP lease/static IP address is a mandatory requirement. However, static IPs are usually offered only for corporate environments, and not everyone wants to pay extra for such in order to establish a simple server environment in home.
+- Server admins are able to remotely connect to the server environment although the server IP has been changed. This is possible because admins are notified about any WAN IPv4 address changes via email by the server itself, automatically.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ In most server environments, static DHCP lease/static IP address is a mandatory 
 
     - systemd - service file
 
-    - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - email client
+    - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client
 
     - bash
 
@@ -42,7 +42,9 @@ In most server environments, static DHCP lease/static IP address is a mandatory 
 
 **2)** Insert `wanip-checker.sh` into your `/home/myuser/` folder
 
-**3)** Configure your email address and message form in `wanip-checker.sh` file
+**3)** Configure your email address and message form in `wanip-checker.sh` file. In addition, configure WAN IPv4 log file location (default is `$HOME`)
+
+    - log file is updated only when WAN IPv4 changes have been detected
 
 **3)** Install `ssmtp`, and configure files `/etc/ssmtp/revaliases` and `/etc/ssmtp/ssmtp.conf` as described on [SSMTP Arch Wiki site](https://wiki.archlinux.org/index.php/SSMTP).
 
@@ -59,7 +61,7 @@ systemctl --user daemon-reload
 
 ## Images
 
-When server computer discovers changes in WAN IPv4, it automatically sends an email notification for system administrators:
+When server computer discovers a change in its WAN IPv4, it automatically sends an email notification to system administrators:
 
 ![](images/wanip_email.png)
 
