@@ -14,8 +14,8 @@ After=network-online.target
 [Service]
 ExecStart=/usr/bin/bash /home/%i/wanip-checker.sh
 
-# Restart (check) every 1 minute (60 seconds)
-RestartSec=60
+# Restart (check) every 20 minutes (1200 seconds)
+RestartSec=1200
 Restart=always
 
 # Emailing fails if this is enabled
