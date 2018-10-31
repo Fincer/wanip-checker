@@ -70,3 +70,7 @@ When server computer discovers a change in its WAN IPv4, it automatically sends 
 Additionally, server computer keeps a log file which include WAN IPv4 changes and corresponding timestamps:
 
 ![](images/wanip_log.png)
+
+## License
+
+This repository is licensed under GPLv3.
