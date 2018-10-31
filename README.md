@@ -22,7 +22,9 @@ This repository contains a systemd service file & a simple bash script to refres
 
     - systemd - service file
 
-    - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client
+    - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client (package: `ssmtp` (Arch Linux), `ssmtp` (Ubuntu))
+    
+    - dig (package: `bind-tools` (Arch Linux), `dnsutils` (Ubuntu))
 
     - bash
 
@@ -38,7 +40,7 @@ This repository contains a systemd service file & a simple bash script to refres
 
 **1)** Insert `wanip-checker@.service` into `/usr/lib/systemd/user/` folder
 
-- WAN IP check interval is customizable in systemd service file. Default value is `60` (1 min)
+- WAN IP check interval is customizable in systemd service file. Default value is `1200` (20 min)
 
 **2)** Insert `wanip-checker.sh` into your `/home/myuser/` folder
 
