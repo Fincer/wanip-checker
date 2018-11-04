@@ -1,0 +1,14 @@
+# Should be placed to /usr/lib/systemd/user/
+
+[Unit]
+Description=WAN IPv4 checker & email sender for dynamic IPv4 server environments
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/bash /home/%i/wanchecker.sh
+
+# Emailing fails if this is enabled
+#NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

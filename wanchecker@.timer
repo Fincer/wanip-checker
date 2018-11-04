@@ -1,0 +1,14 @@
+# Should be placed to /usr/lib/systemd/user/
+
+# https://wiki.archlinux.org/index.php/Systemd/Timers
+
+[Unit]
+Description=Run WAN IP checker in fixed intervals and on boot
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=20min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
