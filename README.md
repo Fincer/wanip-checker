@@ -83,3 +83,7 @@ Additionally, server computer keeps a log file which include WAN IPv4 changes an
 - `systemctl --user status wanchecker@myusername.timer` = more compherensive output about the status of `wanchecker`
 
 etc.
+
+## License
+
+This repository uses GPLv3 license. See [LICENSE](./LICENSE) file for details.
