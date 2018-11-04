@@ -23,7 +23,7 @@ This repository contains a systemd service file & a simple bash script to refres
     - systemd - service file
 
     - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client (package: `ssmtp` (Arch Linux), `ssmtp` (Ubuntu))
-    
+
     - dig (package: `bind-tools` (Arch Linux), `dnsutils` (Ubuntu))
 
     - bash
@@ -32,38 +32,41 @@ This repository contains a systemd service file & a simple bash script to refres
 
 ## Contents
 
-- systemd **user** service file: `wanip-checker@.service`
+- systemd **user** service file: `wanchecker@.service`
 
-- bash script: `wanip-checker.sh`
+- systemd **user** timer file: `wanchecker@.timer`
+
+- bash script: `wanchecker.sh`
 
 ## Installation
 
-**1)** Insert `wanip-checker@.service` into `/usr/lib/systemd/user/` folder
+**1)** Insert `wanchecker@.service` and `wanchecker@.timer` into `/usr/lib/systemd/user/` folder
 
-- WAN IP check interval is customizable in systemd service file. Default value is `1200` (20 min)
+- WAN IP check interval is customizable in systemd timer file. Default value is `20min`
 
-**2)** Insert `wanip-checker.sh` into your `/home/myuser/` folder
+**2)** Insert `wanchecker.sh` into your `/home/myuser/` folder (where `myuser` is your real username on your Linux system)
 
-**3)** Configure your email address and message form in `wanip-checker.sh` file. In addition, configure WAN IPv4 log file location (default is `$HOME`)
+**3)** Configure your email address and message form in `wanchecker.sh` file. In addition, configure WAN IPv4 log file location (default is `$HOME`)
 
-    - log file is updated only when WAN IPv4 changes have been detected
+- log file is updated only when WAN IPv4 changes have been detected
 
 **3)** Install `ssmtp`, and configure files `/etc/ssmtp/revaliases` and `/etc/ssmtp/ssmtp.conf` as described on [SSMTP Arch Wiki site](https://wiki.archlinux.org/index.php/SSMTP).
 
 **4)** Run
 
 ```
-systemctl --user enable wanip-checker@myusername.service && \
-systemctl --user start wanip-checker@myusername.service && \
-systemctl --user daemon-reload
+systemctl --user enable wanchecker@myusername.timer && \
+systemctl --user start wanchecker@myusername.timer
 
 ```
 
-**NOTE:** If you change the script contents, make sure to run `systemctl --user restart wanip-checker@myusername.service` afterwards.
+**NOTE:** If you change the shell script contents, make sure to run `systemctl --user restart wanchecker@myusername.timer` afterwards.
+
+Obviously, `myusername` above refers to your true username on your Linux system.
 
 ## Images
 
-When server computer discovers a change in its WAN IPv4, it automatically sends an email notification to system administrators:
+When server computer discovers a change in its WAN IPv4, it automatically sends an email notification to system administrator(s):
 
 ![](images/wanip_email.png)
 
@@ -71,6 +74,12 @@ Additionally, server computer keeps a log file which include WAN IPv4 changes an
 
 ![](images/wanip_log.png)
 
-## License
+## Useful commands
 
-This repository is licensed under GPLv3.
+- `systemctl --user --all list-timers` = list all user-specific timers on Linux system, including `wanchecker`
+
+- `systemctl --user is-active wanchecker@myusername.timer` = tells whether wanchecker is running or not
+
+- `systemctl --user status wanchecker@myusername.timer` = more compherensive output about the status of `wanchecker`
+
+etc.
