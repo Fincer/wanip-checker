@@ -9,6 +9,3 @@ ExecStart=/usr/bin/bash /home/%i/wanchecker.sh
 
 # Emailing fails if this is enabled
 #NoNewPrivileges=true
-
-[Install]
-WantedBy=default.target
