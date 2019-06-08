@@ -6,4 +6,5 @@ After=network-online.target
 
 [Service]
 User=mail
+Group=mail
 ExecStart=/usr/bin/bash /etc/ssmtp/wanchecker.sh
