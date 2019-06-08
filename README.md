@@ -63,12 +63,12 @@ To-be-added
 **4)** Run (as root or with `sudo)
 
 ```
-systemctl enable wanchecker@myusername.timer && \
-systemctl start wanchecker@myusername.timer
+systemctl enable wanchecker@my_system_username.timer && \
+systemctl start wanchecker@my_system_username.timer
 
 ```
 
-where `myusername` refers to your true username on your Linux system.
+where `my_system_username` refers to your true username on your Linux system.
 
 ## Images
 
@@ -84,9 +84,9 @@ Additionally, server computer keeps a log file which include WAN IPv4 changes an
 
 - `systemctl --all list-timers` = list all system timers on Linux system, including `wanchecker`
 
-- `systemctl is-active wanchecker@myusername.timer` = tells whether wanchecker is running or not
+- `systemctl is-active wanchecker@my_system_username.timer` = tells whether wanchecker is running or not
 
-- `systemctl status wanchecker@myusername.timer` = more compherensive output about the status of `wanchecker`
+- `systemctl status wanchecker@my_system_username.timer` = more compherensive output about the status of `wanchecker`
 
 ## License
 
