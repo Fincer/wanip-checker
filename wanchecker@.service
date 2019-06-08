@@ -5,7 +5,5 @@ Description=WAN IPv4 checker & email sender for dynamic IPv4 server environments
 After=network-online.target
 
 [Service]
+User=%i
 ExecStart=/usr/bin/bash /home/%i/wanchecker.sh
-
-# Emailing fails if this is enabled
-#NoNewPrivileges=true
