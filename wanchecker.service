@@ -1,9 +1,9 @@
-# Should be placed to /usr/lib/systemd/user/
+# Should be placed to /usr/lib/systemd/system/
 
 [Unit]
 Description=WAN IPv4 checker & email sender for dynamic IPv4 server environments
 After=network-online.target
 
 [Service]
-User=%i
-ExecStart=/usr/bin/bash /home/%i/wanchecker.sh
+User=mail
+ExecStart=/usr/bin/bash /etc/ssmtp/wanchecker.sh

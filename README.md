@@ -20,9 +20,9 @@ This repository contains a systemd service file & a simple bash script to refres
 
 - Linux OS
 
-    - systemd - service file
+    - systemd
 
-    - [SSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client (package: `ssmtp` (Arch Linux), `ssmtp` (Ubuntu))
+    - [sSMTP](https://wiki.archlinux.org/index.php/SSMTP) - (SMTP) email client (package: `ssmtp` (Arch Linux), `ssmtp` (Ubuntu))
 
     - dig (package: `bind-tools` (Arch Linux), `dnsutils` (Ubuntu))
 
@@ -32,43 +32,41 @@ This repository contains a systemd service file & a simple bash script to refres
 
 ## Contents
 
-- systemd **system** service file: `wanchecker@.service`
+- systemd **system** service file: [wanchecker.service](wanchecker.service)
 
-- systemd **system** timer file: `wanchecker@.timer`
+- systemd **system** timer file: [wanchecker.timer](wanchecker.timer)
 
-- bash script: `wanchecker.sh`
+- [sSMTP sample configuration files](ssmtp_conf-sample)
 
-## Installation
+    - [ssmtp.conf](ssmtp_conf-sample/ssmtp.conf)
+    
+    - [revaliases](ssmtp_conf-sample/revaliases)
+    
+    - [wanchecker.sh](ssmtp_conf-sample/wanchecker.sh)
 
-Configuration can be splitted into two parts as follows.
+## Installation & configuration
 
-### ssmtp
+**1)** Install `ssmtp` package
 
-To-be-added
+**2)** Configure files `/etc/ssmtp/revaliases` ([sample](ssmtp_conf-sample/revaliases)) and `/etc/ssmtp/ssmtp.conf` ([sample](ssmtp_conf-sample/ssmtp.conf)). More information about these files on [sSMTP Arch Wiki site](https://wiki.archlinux.org/index.php/SSMTP).
 
-### wanip-checker
+**3)** Insert [wanchecker.sh](ssmtp_conf-sample/wanchecker.sh) into `/etc/ssmtp/` folder.
 
-**1)** Insert `wanchecker@.service` and `wanchecker@.timer` into `/usr/lib/systemd/system/` folder
+**4)** Configure sSMTP as described in [sSMTP Readme file](ssmtp_conf-sample/README.md).
+
+**5)** Insert `wanchecker.service` and `wanchecker.timer` into `/usr/lib/systemd/system/` folder
 
 - WAN IP check interval is customizable in systemd timer file. Default value is `20min`
 
-**2)** Insert `wanchecker.sh` into your `/home/myuser/` folder (where `myuser` is your real username on your Linux system)
+- This log file is updated only when WAN IPv4 changes have been detected
 
-**3)** Configure your email address and message form in `wanchecker.sh` file. Configure WAN IPv4 log file location (default is `$HOME`)
-
-- log file is updated only when WAN IPv4 changes have been detected
-
-**3)** Install `ssmtp`, and configure files `/etc/ssmtp/revaliases` and `/etc/ssmtp/ssmtp.conf` as described on [SSMTP Arch Wiki site](https://wiki.archlinux.org/index.php/SSMTP).
-
-**4)** Run (as root or with `sudo)
+**6)** Run (as root or with `sudo`)
 
 ```
-systemctl enable wanchecker@my_system_username.timer && \
-systemctl start wanchecker@my_system_username.timer
+systemctl enable wanchecker.timer && \
+systemctl start wanchecker.timer
 
 ```
-
-where `my_system_username` refers to your true username on your Linux system.
 
 ## Images
 
@@ -84,9 +82,9 @@ Additionally, server computer keeps a log file which include WAN IPv4 changes an
 
 - `systemctl --all list-timers` = list all system timers on Linux system, including `wanchecker`
 
-- `systemctl is-active wanchecker@my_system_username.timer` = tells whether wanchecker is running or not
+- `systemctl is-active wanchecker.timer` = tells whether `wanchecker` is running or not
 
-- `systemctl status wanchecker@my_system_username.timer` = more compherensive output about the status of `wanchecker`
+- `systemctl status wanchecker.timer` = more compherensive output about the status of `wanchecker`
 
 ## License
 

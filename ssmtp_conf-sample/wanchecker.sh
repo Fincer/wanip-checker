@@ -27,7 +27,7 @@
 
 # Script requirements
 #
-# SSMTP
+# sSMTP
 
 # https://wiki.archlinux.org/index.php/SSMTP
 # Relevant conf files
@@ -81,10 +81,10 @@ function checkWANIP {
 ############################
 
     # Cache/Log directory of the script
-    local WANIP_DIR="$HOME"
+    local WANIP_DIR="/var/spool/mail"
 
     # Log file for checked/resolved IPv4 WAN addresses
-    local WANIP_LOG="$WANIP_DIR/.ip_wan.log"
+    local WANIP_LOG="$WANIP_DIR/ip_wan.log"
 
     if [[ ! -d "${WANIP_DIR}" ]]; then
       mkdir -p "${WANIP_DIR}"

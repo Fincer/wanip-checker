@@ -1,4 +1,4 @@
-# Should be placed to /usr/lib/systemd/user/
+# Should be placed to /usr/lib/systemd/system/
 
 # https://wiki.archlinux.org/index.php/Systemd/Timers
 
