@@ -1,6 +1,6 @@
 # WAN IP checker
 
-WAN IPv4 checker & email notifier for server environments behind dynamic DHCP.
+WAN IPv4 checker & email notifier for server environments behind dynamic IP address.
 
 ## About
 
@@ -32,37 +32,43 @@ This repository contains a systemd service file & a simple bash script to refres
 
 ## Contents
 
-- systemd **user** service file: `wanchecker@.service`
+- systemd **system** service file: `wanchecker@.service`
 
-- systemd **user** timer file: `wanchecker@.timer`
+- systemd **system** timer file: `wanchecker@.timer`
 
 - bash script: `wanchecker.sh`
 
 ## Installation
 
-**1)** Insert `wanchecker@.service` and `wanchecker@.timer` into `/usr/lib/systemd/user/` folder
+Configuration can be splitted into two parts as follows.
+
+### ssmtp
+
+To-be-added
+
+### wanip-checker
+
+**1)** Insert `wanchecker@.service` and `wanchecker@.timer` into `/usr/lib/systemd/system/` folder
 
 - WAN IP check interval is customizable in systemd timer file. Default value is `20min`
 
 **2)** Insert `wanchecker.sh` into your `/home/myuser/` folder (where `myuser` is your real username on your Linux system)
 
-**3)** Configure your email address and message form in `wanchecker.sh` file. In addition, configure WAN IPv4 log file location (default is `$HOME`)
+**3)** Configure your email address and message form in `wanchecker.sh` file. Configure WAN IPv4 log file location (default is `$HOME`)
 
 - log file is updated only when WAN IPv4 changes have been detected
 
 **3)** Install `ssmtp`, and configure files `/etc/ssmtp/revaliases` and `/etc/ssmtp/ssmtp.conf` as described on [SSMTP Arch Wiki site](https://wiki.archlinux.org/index.php/SSMTP).
 
-**4)** Run
+**4)** Run (as root or with `sudo)
 
 ```
-systemctl --user enable wanchecker@myusername.timer && \
-systemctl --user start wanchecker@myusername.timer
+systemctl enable wanchecker@myusername.timer && \
+systemctl start wanchecker@myusername.timer
 
 ```
 
-**NOTE:** If you change the shell script contents, make sure to run `systemctl --user restart wanchecker@myusername.timer` afterwards.
-
-Obviously, `myusername` above refers to your true username on your Linux system.
+where `myusername` refers to your true username on your Linux system.
 
 ## Images
 
@@ -76,13 +82,11 @@ Additionally, server computer keeps a log file which include WAN IPv4 changes an
 
 ## Useful commands
 
-- `systemctl --user --all list-timers` = list all user-specific timers on Linux system, including `wanchecker`
+- `systemctl --all list-timers` = list all system timers on Linux system, including `wanchecker`
 
-- `systemctl --user is-active wanchecker@myusername.timer` = tells whether wanchecker is running or not
+- `systemctl is-active wanchecker@myusername.timer` = tells whether wanchecker is running or not
 
-- `systemctl --user status wanchecker@myusername.timer` = more compherensive output about the status of `wanchecker`
-
-etc.
+- `systemctl status wanchecker@myusername.timer` = more compherensive output about the status of `wanchecker`
 
 ## License
 
