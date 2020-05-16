@@ -277,10 +277,8 @@ function checkWANIP {
       IFS=
 
       MAIL_SENT_STATUSES_STR=""
-      for status in ${MAIL_SENT_STATUSES[@]}; do
-        for email in ${!MAIL_SENT_STATUSES[@]}; do
-          MAIL_SENT_STATUSES_STR="${MAIL_SENT_STATUSES_STR}${email}:${status},"
-        done
+      for email in ${!MAIL_SENT_STATUSES[@]}; do
+        MAIL_SENT_STATUSES_STR="${MAIL_SENT_STATUSES_STR}${email}:${MAIL_SENT_STATUSES[$email]},"
       done
 
       MAIL_SENT_STATUSES_STR=$(echo "${MAIL_SENT_STATUSES_STR}" | sed 's/,$//')
