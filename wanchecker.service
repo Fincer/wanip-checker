@@ -1,8 +1,7 @@
 # Should be placed to /usr/lib/systemd/system/
 
 [Unit]
-Description=WAN IPv4 checker & email sender for dynamic IPv4 server environments
-After=network-online.target
+Description=WAN IPv4 checker & email sender for dynamic IPv4 environments
 
 [Service]
 User=mail

@@ -3,12 +3,11 @@
 # https://wiki.archlinux.org/index.php/Systemd/Timers
 
 [Unit]
-Description=Run WAN IP checker in fixed intervals and on boot
+Description=Run WAN IP checker service in fixed intervals and on boot
 
 [Timer]
 OnBootSec=2min
-OnUnitActiveSec=20min
-Persistent=true
+OnUnitActiveSec=15min
 
 [Install]
 WantedBy=timers.target
