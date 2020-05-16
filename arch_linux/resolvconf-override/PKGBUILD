@@ -1,0 +1,36 @@
+# Maintainer: Pekka Helenius <fincer89 [at] hotmail [dot] com>
+
+pkgname=resolvconf-override
+pkgver=11.7b292ef
+pkgrel=1
+pkgdesc='Override resolv.conf through environment variables'
+arch=('any')
+url='https://github.com/hadess/${pkgname}'
+license=('Custom')
+depends=('glibc')
+makedepends=('git' 'meson' 'ninja')
+source=("git+https://github.com/hadess/${pkgname}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  if [[ $(git describe) ]]; then
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  else
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+  fi
+}
+
+build() {
+  cd "$pkgname"
+  sed -i "s/gettext-pseudolocale/${pkgname}/g" meson.build
+  mkdir build
+  cd build
+  meson ..
+  ninja
+}
+
+package() {
+  cd "$pkgname/build"
+  install -Dt ${pkgdir}/usr/lib/ -m0644 libresolvconf-override.so
+}
