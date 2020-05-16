@@ -1,0 +1,32 @@
+# Maintainer: Pekka Helenius <fincer89 [at] hotmail [dot] com>
+
+pkgname=wanip-checker
+pkgver=22.9e5e6ed
+pkgrel=1
+pkgdesc='WAN IPv4 checker & email notifier for servers behind dynamic IP/DHCP'
+arch=('any')
+url="https://github.com/Fincer/${pkgname}"
+license=('GPLv3')
+depends=('systemd' 'ssmtp' 'curl' 'bash' 'awk')
+makedepends=('git')
+options=(!emptydirs)
+install=${pkgname}.install
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+
+  if [[ $(git describe) ]]; then
+    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  else
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+  fi
+}
+
+package() {
+  cd $pkgname
+  install -Dt ${pkgdir}/usr/lib/systemd/system/ -m0644 wanchecker.{service,timer}
+  install -Dt ${pkgdir}/etc/ssmtp/ -m0750 ssmtp_conf-sample/wanchecker.sh
+  install -Dt ${pkgdir}/etc/ssmtp/ -m0640 ssmtp_conf-sample/wanchecker.conf
+}

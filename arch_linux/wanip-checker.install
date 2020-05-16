@@ -1,0 +1,14 @@
+post_install() {
+  echo "Configure files /etc/ssmtp/revaliases, /etc/ssmtp/ssmtp.conf and /etc/ssmtp/wanchecker.conf
+after which run:
+systemctl enable wanchecker.timer
+systemctl start wanchecker.timer
+
+See example SSMTP configuration files on https://github.com/Fincer/wanip-checker
+"
+  chown root.mail /etc/ssmtp/wanchecker.{sh,conf}
+}
+
+post_upgrade() {
+  post_install
+}
