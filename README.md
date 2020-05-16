@@ -12,7 +12,7 @@ Static IPs are usually offered only to corporate environments, and not everyone 
 
 This repository contains a Systemd service & a simple bash script to refresh current WAN IPv4 of a Linux computer, and notify administration for any changes in the WAN IPv4 (Internet) address. This method addresses to several issues:
 
-- Administreation is always aware of the current server IPv4 address, whether the address is dynamic or not.
+- Administration is always aware of the current server IPv4 address, whether the address is dynamic or not.
 
 - Administration is able to remotely connect to the server environment although the server IP has been changed. This is possible because admins are notified about any WAN IPv4 address changes via email by the server itself, automatically.
 
