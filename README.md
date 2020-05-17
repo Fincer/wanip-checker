@@ -40,11 +40,17 @@ The WAN IP checker script has several countermeasures for the following failures
 
     - curl
 
+        - Recommended curl build options for proper DNS fallback support: `--enable-dnsshuffle` and `--enable-ares` (requires `c-ares` package)
+
+        - If you work on IPv4-only environments, consider building curl with `--disable-ipv6` option
+
     - bash
 
     - awk
 
     - cat
+
+    - eval
 
     - grep
 
