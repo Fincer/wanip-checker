@@ -107,7 +107,7 @@ function curlFallBackDNS {
 
   fallback_dns=""
   preload_lib=""
-  if [[ $(curl -V | sed -n '/AsynchDNS/p' | wc -l) -ne 0 ]] &&
+  if [[ $(curl -V | grep -c -oE '(c-ares|AsynchDNS)') -eq 2 ]] &&
   [[ $ENABLE_FALLBACK_DNS == 1 ]]; then
     # Fallback DNS servers can be used
     fallback_dns=$(echo ${FALLBACK_DNS[*]} | sed 's/ /,/g')
