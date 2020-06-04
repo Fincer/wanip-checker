@@ -237,13 +237,13 @@ function checkWANIP {
 
     local EMAIL_FORM="To: ${1}\nFrom: ${EMAIL_SENDER}\nSubject: ${SUBJECT_EMAIL}\n\n${MESSAGE_EMAIL}"
 
-    echo -e "${EMAIL_FORM}" | sendmail -v "${1}"
+    echo -e "${EMAIL_FORM}" | ssmtp -v "${1}"
     if [[ $? -eq 0 ]]; then
       MAIL_SENT="OK"
     else
       if [[ -f "/usr/lib/libresolvconf-override.so" ]] && [[  $ENABLE_FALLBACK_DNS == 1 ]]; then
         SENDMAIL_PRELOAD="LD_PRELOAD=/usr/lib/libresolvconf-override.so $(resolvconfOverrideDNSList)"
-        echo -e "${EMAIL_FORM}" | $(eval ${SENDMAIL_PRELOAD} sendmail -v "${1}")
+        echo -e "${EMAIL_FORM}" | $(eval ${SENDMAIL_PRELOAD} ssmtp -v "${1}")
         if [[ $? -eq 0 ]]; then
           MAIL_SENT="OK"
         fi
