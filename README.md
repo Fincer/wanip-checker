@@ -2,6 +2,8 @@
 
 WAN IPv4 checker & email notifier for computer environments behind dynamic IP address.
 
+**NOTE:** I currently use proper Linux network namespace setup for this script and for fallback DNS servers. Therefore, in my point of view, introduced `LD_PRELOAD` method is obsolete and I do not recommend using it anymore (I actually found it quite buggy, too). I leave it for legacy purposes if someone finds it useful, anyway.
+
 ## About
 
 In many home networks, WAN (Wide Area Network) IP addresses are dynamically allocated by a local ISP. Usually this is acceptable in common household/home use, but not in server use where static DHCP lease/static IP address is very much a mandatory requirement.
