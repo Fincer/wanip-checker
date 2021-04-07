@@ -204,7 +204,7 @@ function checkWANIP {
     fi
 
     if [[ $(cat "${WANIP_LOG}" | wc -l) -gt 1 ]] ; then
-      local WANIP_OLD=$(tail -1 "${WANIP_LOG}" | awk '{print $2}')
+      local WANIP_OLD=$(tail -1 "${WANIP_LOG}" | grep -oE '([0-9]{2,3}\.){3}([0-9]{2,3})')
     fi
 
     if [[ ${WANIP_OLD} == "" ]]; then
